@@ -53,7 +53,7 @@ RUN chmod u+x,g+x /etc/init.d/gunicorn-helloworld && rc-update add gunicorn-hell
 
 WORKDIR /usr/src/helloworld
 
-EXPOSE 80
+EXPOSE 8888
 
 COPY ${BASE_DOCKER_DIR}/requirements-base.txt ./
 RUN pip install --no-cache-dir -r requirements-base.txt

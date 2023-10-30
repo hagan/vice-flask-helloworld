@@ -20,6 +20,6 @@ if [ "$1" = 'httpd' ]; then
   echo "Service '$1': Launching ..."
 fi
 
-tail -f /dev/null
+exec tail -f /dev/null
 
 # exec $@
