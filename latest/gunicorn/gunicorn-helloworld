@@ -1,0 +1,25 @@
+#!/sbin/openrc-run
+
+name=$RC_SVCNAME
+cfgfile="/etc/init.d/$RC_SVCNAME"
+description="Gunicorn Hello World HTTP Server"
+command="/usr/local/bin/gunicorn"
+command_args="-c /etc/gunicorn/helloworld.conf.py app:app"
+command_user="nginx"
+command_group="www-data"
+pidfile="/var/run/gunicorn.pid"
+retry=TERM/30/KILL/5
+start_stop_daemon_args="--chdir /usr/src/helloworld"
+
+start_pre() {
+    ebegin "Performing pre-start tasks"
+    checkpath --directory --owner $command_user:$command_group --mode 0775 \
+        /run/$RC_SVCNAME /var/log/$RC_SVCNAME
+    eend $? "Pre-start tasks failed"
+}
+
+depend() {
+    after network
+    need net
+    use dns logger
+}
