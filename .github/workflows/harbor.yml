@@ -43,7 +43,7 @@ jobs:
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           platforms: linux/amd64
-          tags: harbor.cyverse.org/{{ secrets.HARBOR_USERNAME }}/python/vice-flask-helloworld:latest
+          tags: harbor.cyverse.org/${{ secrets.HARBOR_USERNAME }}/python/vice-flask-helloworld:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
           
